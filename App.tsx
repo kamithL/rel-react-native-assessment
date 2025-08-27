@@ -1,20 +1,29 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+// MUST be first
+import 'react-native-gesture-handler';
+
+import React from 'react';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { Provider as ReduxProvider } from 'react-redux';
+import { store } from './src/app/store';
+import { Provider as AntProvider } from '@ant-design/react-native';
+import enUS from '@ant-design/react-native/lib/locale-provider/en_US';
+
+import { useFonts } from 'expo-font';
+const antDesignTtf = require('@expo/vector-icons/build/vendor/react-native-vector-icons/Fonts/AntDesign.ttf');
+
+import MapScreen from './src/features/map/MapScreen';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({ AntDesign: antDesignTtf });
+  if (!fontsLoaded) return null;  
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ReduxProvider store={store}>
+        <AntProvider locale={enUS}>
+          <MapScreen />
+        </AntProvider>
+      </ReduxProvider>
+    </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
