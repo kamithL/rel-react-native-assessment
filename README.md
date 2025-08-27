@@ -37,8 +37,8 @@ src/
       api.ts
       components/
         SearchBar.tsx
-        HistoryBar.tsx        # optional
-        ResultsList.tsx       # optional
+        HistoryBar.tsx   
+    
   types/
     antd-locale.d.ts          # TS shim for AntD en_US locale
 App.tsx
